@@ -1,86 +1,72 @@
-//Nav.css import .............
+// Navbar.jsx
+import React, { useState } from "react";
 import "./Navbar.css";
+import { FiChevronDown } from "react-icons/fi";
+import logo from "../Assets/logo.png";
+import { sidebarNavigation } from "../../Data/Data"; // <-- Update the path based on your folder structure
 
-//router link  import .............
-import { Link, NavLink } from "react-router-dom";
+const Navbar = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
 
-//logo import .............
-import Logo from "../Assets/logo.png";
+  const { primary, secondary, footer } = sidebarNavigation;
 
-//Navdata import .............
-import { navLinks, navRight } from "../../Data/Data";
-
-//menu item import .............
-import { VscMenu } from "react-icons/vsc";
-import { GrClose } from "react-icons/gr";
-
-//use state  import .............
-import { useState } from "react";
-export default function Navbar() {
-  // use state for navlinks show and hide feature.................
-  const [isNavLinksShowing, setIsnavLinkShowing] = useState(false);
-  // window scroll  navlinks .................
-  if (window.innerWidth < 1024) {
-    window.addEventListener("scroll", () => {
-      document.querySelector(".nav-links").classList.add("navLinksHide");
-      setIsnavLinkShowing(false);
-    });
-  }
-  window.addEventListener("scroll", () => {
-    document
-      .querySelector("nav")
-      .classList.toggle("navShadow", window.scrollY > 0);
-  });
   return (
-    <nav className="Navbar">
-      <div className="container  nav-container">
-        {/*.......logo.........*/}
-        <Link to={"/"} className="logo">
-          <img src={Logo} alt="Logo" />
-        </Link>
-        {/*.......Nva-links.........*/}
+    <div className="nav-container">
+      <nav
+        className={`nav-sidebar ${isExpanded ? "expanded" : ""}`}
+        onMouseEnter={() => setIsExpanded(true)}
+        onMouseLeave={() => setIsExpanded(false)}
+      >
+        <div className="nav-sidebar-left">
+          <div className="nav-logo">
+            <img src={logo} alt="Logo" />
+          </div>
 
-        <ul
-          className={`nav-links ${
-            isNavLinksShowing ? "navLinksShow" : "navLinksHide"
-          }`}
-        >
-          {navLinks.map(({ name, path }, index) => {
-            return (
-              <li key={index}>
-                <NavLink
-                  to={path}
-                  className={({ isActive }) => (isActive ? "active " : "")}
-                >
-                  {name}
-                </NavLink>
-              </li>
-            );
-          })}
-        </ul>
+          <div className="nav-main">
+            {primary.map((item, index) => (
+              <button key={index} className="nav-btn">
+                {item.icon}
+                {isExpanded && (
+                  <span className="nav-btn-text">{item.name}</span>
+                )}
+              </button>
+            ))}
+          </div>
 
-        {/*.......Nva-right.........*/}
-        <div className="nav-right">
-          {navRight.managements.map((item, index) => {
-            return (
-              <Link
-                key={index}
-                // target="_blank"
-                className="management-icons "
-                to={item.link}
-              >
-                <item.icon />
-              </Link>
-            );
-          })}
-          <button
-            className="menu-button"
-            onClick={() => setIsnavLinkShowing(!isNavLinksShowing)}
-          >
-            {!isNavLinksShowing ? <VscMenu /> : <GrClose />}
-          </button>
+          <div className="nav-footer">
+            {footer.map((item, index) => (
+              <button key={index} className="nav-btn">
+                {item.icon}
+                {isExpanded && (
+                  <span className="nav-btn-text">{item.name}</span>
+                )}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
-    </nav>
+
+        <div className="nav-sidebar-right">
+          <div className="nav-content">
+            <header className="nav-header">
+              <div>
+                <h2 className="nav-title">Untitled UI</h2>
+                <h3 className="nav-subtitle">store.untitledui.com</h3>
+              </div>
+              <FiChevronDown className="nav-chevron" />
+            </header>
+            <div className="nav-menu">
+              {secondary.map((item, index) => (
+                <button key={index} className="nav-menu-btn">
+                  {item.icon}
+                  <span className="nav-menu-text">{item.name}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
   );
-}
+};
+
+export default Navbar;
