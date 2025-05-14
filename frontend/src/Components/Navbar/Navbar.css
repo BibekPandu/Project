@@ -1,0 +1,205 @@
+/* Navbar.css */
+
+/* Main Navigation Bar Styling */
+nav.Navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px; /* Adjust as needed */
+  background-color: transparent; /* Initial transparent background */
+  z-index: 1000; /* Ensure it's above other content */
+  transition: background-color var(--trasition, 0.4s ease),
+    box-shadow var(--trasition, 0.4s ease);
+  font-family: var(--font-family-Jakarta, "Plus Jakarta Sans", sans-serif);
+}
+
+/* Style for the navbar when scrolled (navShadow class) */
+nav.Navbar.navShadow {
+  background-color: var(
+    --color-bg-1,
+    #f3f2ec
+  ); /* Use a background from app.css */
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation Container (uses .container from app.css for width) */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%; /* Takes full height of nav.Navbar */
+}
+
+/* Logo Styling */
+.nav-container .logo img {
+  height: 45px; /* Adjust logo size */
+  display: block; /* Removes extra space below image */
+}
+
+/* Navigation Links List - Desktop */
+.nav-container .nav-links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 10px; /* Adjust gap between links */
+}
+
+.nav-container .nav-links li a {
+  /* Targets NavLink */
+  display: block;
+  padding: 10px 15px;
+  color: var(--color-black-Ex, #222222);
+  text-decoration: none;
+  text-transform: capitalize;
+  font-weight: 500;
+  position: relative;
+  transition: color var(--trasition, 0.4s ease);
+}
+
+.nav-container .nav-links li a:hover,
+.nav-container .nav-links li a.active {
+  /* Style for active NavLink */
+  color: var(--color-primary, rgb(189, 61, 38));
+}
+
+/* Underline effect for active/hover links */
+.nav-container .nav-links li a::after {
+  content: "";
+  position: absolute;
+  bottom: 0; /* Adjust to position underline correctly */
+  left: 15px;
+  right: 15px;
+  height: 2px;
+  background-color: var(--color-primary, rgb(189, 61, 38));
+  transform: scaleX(0);
+  transition: transform var(--trasition, 0.3s ease);
+}
+
+.nav-container .nav-links li a:hover::after,
+.nav-container .nav-links li a.active::after {
+  transform: scaleX(1);
+}
+
+/* Navigation Right Section (icons and menu button) */
+.nav-container .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Space between icons and menu button */
+}
+
+.nav-container .nav-right .management-icons {
+  font-size: 22px; /* Adjust icon size */
+  color: var(--color-black-Ex, #222222);
+  display: flex; /* Helps align icons if they are complex */
+  align-items: center;
+  transition: color var(--trasition, 0.4s ease);
+}
+
+.nav-container .nav-right .management-icons:hover {
+  color: var(--color-primary, rgb(189, 61, 38));
+}
+
+/* Menu Button (for mobile/tablet) */
+.nav-container .menu-button {
+  display: none; /* Hidden on desktop */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 28px; /* Adjust icon size */
+  color: var(--color-black-Ex, #222222);
+}
+
+/* Responsive Styles (for screens smaller than 1024px) */
+@media screen and (max-width: 1023px) {
+  nav.Navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+  }
+  nav.Navbar.menu-open {
+    background-color: #ffffff; /* or any solid color you want */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* optional shadow */
+  }
+
+  .nav-container .nav-links {
+    position: absolute;
+    top: 100%; /* Position below the navbar */
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch; /* Links take full width */
+    background-color: var(--color-bg-1, #f3f2ec);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 0; /* Reset padding */
+    gap: 0; /* Reset gap for column layout */
+
+    /* Animation for showing/hiding */
+    opacity: 0;
+    transform: translateY(-10px); /* Start slightly above */
+    pointer-events: none; /* Not interactive when hidden */
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+  }
+
+  .nav-container .nav-links.navLinksShow {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
+  }
+
+  /* This class is directly added by JS on scroll for <1024px,
+     ensure it behaves like the hidden state of navLinksShow */
+  .nav-container .nav-links.navLinksHide {
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .nav-container .nav-links li {
+    width: 100%;
+  }
+
+  .nav-container .nav-links li a {
+    padding: 18px 25px; /* Larger touch targets */
+    text-align: left; /* Or center, as preferred */
+    border-bottom: 1px solid var(--color-dark-Ex, #e5e3da);
+    color: var(
+      --color-black,
+      #111111
+    ); /* Ensure good contrast on mobile menu bg */
+  }
+  .nav-container .nav-links li a.active,
+  .nav-container .nav-links li a:hover {
+    color: var(--color-primary, rgb(189, 61, 38));
+    background-color: var(
+      --color-bg-2,
+      #edebe4
+    ); /* Optional: highlight background */
+  }
+
+  .nav-container .nav-links li:last-child a {
+    border-bottom: none;
+  }
+
+  .nav-container .nav-links li a::after {
+    /* Optionally disable or restyle underline for mobile menu if it feels cluttered */
+    display: none;
+  }
+
+  .nav-container .menu-button {
+    display: block; /* Show menu button */
+    z-index: 10; /* Ensure it's clickable if nav-links overlaps somehow */
+  }
+
+  /* Ensure right-side icons are still visible or adjust as needed */
+  .nav-container .nav-right {
+    gap: 10px; /* Reduce gap on mobile if needed */
+  }
+}
