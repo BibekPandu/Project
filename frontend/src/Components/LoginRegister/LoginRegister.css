@@ -1,0 +1,216 @@
+/* LoginRegister.css */
+
+/* Ensure all styles for this component are scoped to .login-box
+   to prevent conflicts with app.css and other components. */
+
+.login-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; /* Adjust as needed, ensures it's visible on typical screens */
+  padding: 20px; /* Padding around the box if it's not full screen */
+  font-family: var(
+    --font-family-Jakarta,
+    "Plus Jakarta Sans",
+    sans-serif
+  ); /* Default font for the form */
+}
+
+.login-box .wrapper {
+  width: 450px; /* Increased width for better spacing */
+  background: var(
+    --color-bg-2,
+    #edebe4
+  ); /* Use background from app.css or a specific one */
+  padding: 30px 40px; /* More padding inside the wrapper */
+  border-radius: 10px; /* Softer edges */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border: 1px solid var(--color-dark-Ex, #e5e3da); /* Light border */
+}
+
+.login-box .form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px; /* Increased space below header */
+}
+
+/* h2 will inherit styles from app.css (Prata font, 28px, color-black)
+   If you need different styling for h2 inside .login-box: */
+.login-box .form-header h2 {
+  font-size: 26px; /* Slightly smaller if preferred, or keep app.css default */
+  color: var(--color-black-Ex, #222222);
+  margin: 0; /* Remove any default h2 margin */
+  font-family: var(
+    --font-family-prata
+  ); /* Explicitly use Prata if not inherited correctly */
+}
+
+/* The toggle button uses .btn and .btn-border from app.css.
+   We can add specific tweaks for its context here if needed. */
+.login-box .form-header .btn.btn-border {
+  padding: 8px 15px; /* Slightly smaller padding for this button */
+  font-size: 13px; /* Smaller font size */
+  text-transform: none; /* Override uppercase from app.css .btn if desired */
+  font-weight: 500; /* Slightly bolder text */
+}
+.login-box .form-header .btn.btn-border:hover {
+  color: var(--color-bg-1, #f3f2ec); /* Keep consistent hover from app.css */
+  background-color: var(--color-black-Ex, #222222);
+}
+
+.login-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between input boxes and other form elements */
+}
+
+.login-box .input-box {
+  position: relative;
+  width: 90%;
+}
+
+.login-box .input-box input {
+  width: 100%;
+  height: 50px; /* Taller input fields */
+  background: var(--color-bg-1, #f3f2ec); /* Light background for inputs */
+  border: 1px solid var(--color-dark-Ex, #e5e3da); /* Subtle border */
+  border-radius: 6px; /* Consistent border radius */
+  outline: none;
+  padding: 0 15px 0 45px; /* Padding: top/bottom, right, left (for icon) */
+  font-size: 16px;
+  color: var(--color-black, #111111);
+  font-family: var(--font-family-Jakarta, "Plus Jakarta Sans", sans-serif);
+  font-weight: 400; /* Reset from global * if needed */
+}
+
+.login-box .input-box input::placeholder {
+  color: var(--color-dark, #7a7a7a);
+  font-weight: 400;
+}
+
+.login-box .input-box .icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px; /* Icon size */
+  color: var(--color-dark, #7a7a7a);
+}
+
+.login-box .input-box .password-toggle {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px; /* Icon size */
+  color: var(--color-dark, #7a7a7a);
+  cursor: pointer;
+}
+.login-box .input-box .password-toggle:hover {
+  color: var(--color-primary, rgb(189, 61, 38));
+}
+
+.login-box .remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14.5px; /* Consistent font size */
+  margin-top: -5px; /* Pull up slightly if too much gap from inputs */
+  margin-bottom: 15px; /* Space before the submit button */
+  color: var(--color-dark, #7a7a7a);
+}
+
+.login-box .remember-forgot label {
+  display: flex; /* Align checkbox and text */
+  align-items: center;
+  color: var(--color-dark, #7a7a7a); /* Ensure label text color */
+  font-weight: 400;
+}
+
+.login-box .remember-forgot input[type="checkbox"] {
+  margin-right: 8px; /* Space between checkbox and "Remember Me" text */
+  accent-color: var(--color-primary, rgb(189, 61, 38)); /* Color the checkbox */
+  width: auto; /* Override global img width if it affects checkbox */
+  height: auto;
+}
+
+.login-box .remember-forgot a {
+  color: var(--color-primary, rgb(189, 61, 38)); /* Link color */
+  text-decoration: none; /* Reset from global * if needed */
+  font-weight: 500;
+}
+
+.login-box .remember-forgot a:hover {
+  text-decoration: underline;
+}
+
+/* Styling for the main action button (.btn-primary) */
+/* It already has .btn class, so app.css .btn styles will apply.
+   We add .btn-primary specifics here, scoped to .login-box. */
+.login-box .btn.btn-primary {
+  background-color: var(--color-primary, rgb(189, 61, 38));
+  color: var(--color-light, #efeee8); /* Text color for primary button */
+  border: none; /* Remove border if any from base .btn or other rules */
+  width: 100%; /* Make button full width */
+  padding: 15px 0; /* Adjust padding for taller button */
+  font-size: 16px;
+  font-weight: 500; /* Bolder text for action button */
+  text-transform: uppercase; /* Retain from app.css or set as desired */
+  letter-spacing: 0.5px;
+  transition: var(--trasition, 0.4s ease); /* Ensure transition is applied */
+  z-index: 0; /* To ensure ::after pseudo-element from app.css .btn works as expected if not overridden */
+}
+
+/* Override the .btn::after behavior for this primary button if needed,
+   or define a new hover effect. For example, a simple background change: */
+.login-box .btn.btn-primary::after {
+  content: none; /* Remove the swipe effect from app.css .btn if you want a different hover */
+}
+
+.login-box .btn.btn-primary:hover {
+  background-color: var(--color-black-Ex, #222222); /* Darker shade for hover */
+  color: var(
+    --color-light,
+    #efeee8
+  ); /* Ensure text color remains or changes as desired */
+  /* box-shadow: 0 0 10px var(--color-primary); */ /* Optional: Add a glow effect */
+}
+
+/* Alert message styling (if you implement one in React for password mismatch etc.) */
+.login-box .alert-message {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  font-size: 14px;
+  text-align: center;
+  background-color: var(--color-dark-Ex, #e5e3da);
+  color: var(--color-primary, rgb(189, 61, 38));
+  border: 1px solid var(--color-primary, rgb(189, 61, 38));
+}
+
+/* Responsive adjustments for the login box if necessary */
+@media (max-width: 600px) {
+  .login-box .wrapper {
+    width: 100%;
+    margin: 0 15px; /* Add some margin on smaller screens */
+    padding: 25px 20px; /* Reduce padding */
+  }
+
+  .login-box .form-header {
+    flex-direction: column; /* Stack header items */
+    gap: 15px; /* Add gap between title and toggle button */
+    text-align: center; /* Center title */
+  }
+
+  .login-box .form-header .btn.btn-border {
+    width: 100%; /* Make toggle button full width in stacked layout */
+    justify-content: center; /* Center text in button */
+  }
+
+  .login-box .remember-forgot {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start; /* Align items to the start in column layout */
+  }
+}
