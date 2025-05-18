@@ -1,14 +1,34 @@
-// Navbar.jsx
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import "./Navbar.css";
-import { FiChevronDown } from "react-icons/fi";
+import {
+  FiHome,
+  FiShoppingBag,
+  FiImage,
+  FiGrid,
+  FiSettings,
+  FiUser,
+  FiLogOut,
+} from "react-icons/fi";
 import logo from "../Assets/logo.png";
-import { sidebarNavigation } from "../../Data/Data"; // <-- Update the path based on your folder structure
 
 const Navbar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const { primary, secondary, footer } = sidebarNavigation;
+  // Main navigation items
+  const navItems = [
+    { name: "Home", icon: <FiHome size={20} />, path: "/" },
+    { name: "Products", icon: <FiShoppingBag size={20} />, path: "/products" },
+    { name: "Gallery", icon: <FiImage size={20} />, path: "/gallery" },
+    { name: "Dashboard", icon: <FiGrid size={20} />, path: "/dashboard" },
+  ];
+
+  // Footer navigation items
+  const footerItems = [
+    { name: "Settings", icon: <FiSettings size={20} />, path: "/settings" },
+    { name: "Profile", icon: <FiUser size={20} />, path: "/profile" },
+    { name: "Logout", icon: <FiLogOut size={20} />, path: "/logout" },
+  ];
 
   return (
     <div className="nav-container">
@@ -23,45 +43,36 @@ const Navbar = () => {
           </div>
 
           <div className="nav-main">
-            {primary.map((item, index) => (
-              <button key={index} className="nav-btn">
+            {navItems.map((item, index) => (
+              <NavLink
+                key={index}
+                to={item.path}
+                className="nav-btn"
+                activeClassName="active"
+                exact
+              >
                 {item.icon}
                 {isExpanded && (
                   <span className="nav-btn-text">{item.name}</span>
                 )}
-              </button>
+              </NavLink>
             ))}
           </div>
 
           <div className="nav-footer">
-            {footer.map((item, index) => (
-              <button key={index} className="nav-btn">
+            {footerItems.map((item, index) => (
+              <NavLink
+                key={index}
+                to={item.path}
+                className="nav-btn"
+                activeClassName="active"
+              >
                 {item.icon}
                 {isExpanded && (
                   <span className="nav-btn-text">{item.name}</span>
                 )}
-              </button>
+              </NavLink>
             ))}
-          </div>
-        </div>
-
-        <div className="nav-sidebar-right">
-          <div className="nav-content">
-            <header className="nav-header">
-              <div>
-                <h2 className="nav-title">Untitled UI</h2>
-                <h3 className="nav-subtitle">store.untitledui.com</h3>
-              </div>
-              <FiChevronDown className="nav-chevron" />
-            </header>
-            <div className="nav-menu">
-              {secondary.map((item, index) => (
-                <button key={index} className="nav-menu-btn">
-                  {item.icon}
-                  <span className="nav-menu-text">{item.name}</span>
-                </button>
-              ))}
-            </div>
           </div>
         </div>
       </nav>

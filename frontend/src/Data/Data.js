@@ -1,65 +1,51 @@
-// React Icons For Nav And React.......................
-import { FiUser } from "react-icons/fi";
-import { VscSearch } from "react-icons/vsc";
-import { BsBag } from "react-icons/bs";
+// Data.js
+import {
+  FiHome,
+  FiShoppingBag,
+  FiUsers,
+  FiMessageSquare,
+  FiImage,
+  FiPackage,
+  FiSettings,
+  FiUser,
+  FiLogOut,
+  FiAward,
+} from "react-icons/fi";
+import { AiOutlineDashboard } from "react-icons/ai";
 
-// Nav [a] Links Data.......................
-export const navLinks = [
-  {
-    name: "Home",
-    path: "/",
-  },
-  {
-    name: "About",
-    path: "/about",
-  },
-  {
-    name: "Pages",
-    path: "/pages",
-  },
-  {
-    name: "Shope",
-    path: "/shope",
-  },
-  {
-    name: "Articles",
-    path: "/articles",
-  },
-  {
-    name: "Contact",
-    path: "/contact",
-  },
-  {
-    name: "About",
-    path: "/about",
-  },
-  {
-    name: "About",
-    path: "/about",
-  },
-  {
-    name: "About",
-    path: "/about",
-  },
-];
-
-// navRight links Data..............................
-export const navRight = {
-  managements: [
+export const sidebarNavigation = {
+  primary: [
+    { icon: <FiHome size={20} />, name: "Home", link: "/" },
+    { icon: <FiShoppingBag size={20} />, name: "Products", link: "/products" },
+    { icon: <FiUsers size={20} />, name: "Customers", link: "/customers" },
     {
-      id: 1,
-      icon: FiUser,
-      link: "*",
+      icon: <FiMessageSquare size={20} />,
+      name: "Messages",
+      link: "/messages",
     },
+    { icon: <FiImage size={20} />, name: "Images", link: "/images" },
+    { icon: <FiPackage size={20} />, name: "Inventory", link: "/inventory" },
+  ],
+  secondary: [
     {
-      id: 2,
-      icon: BsBag,
-      link: "*",
+      icon: <AiOutlineDashboard size={20} />,
+      name: "Dashboard",
+      link: "/dashboard",
     },
+    { icon: <FiShoppingBag size={20} />, name: "Products", link: "/products" },
+    { icon: <FiUsers size={20} />, name: "Customers", link: "/customers" },
     {
-      id: 3,
-      icon: VscSearch,
-      link: "*",
+      icon: <FiMessageSquare size={20} />,
+      name: "Messages",
+      link: "/messages",
     },
+    { icon: <FiImage size={20} />, name: "Images", link: "/images" },
+    { icon: <FiPackage size={20} />, name: "Inventory", link: "/inventory" },
+    { icon: <FiAward size={20} />, name: "Rankings", link: "/rankings" },
+  ],
+  footer: [
+    { icon: <FiSettings size={20} />, name: "Settings", link: "/settings" },
+    { icon: <FiUser size={20} />, name: "Profile", link: "/profile" },
+    { icon: <FiLogOut size={20} />, name: "Logout", link: "/logout" },
   ],
 };
