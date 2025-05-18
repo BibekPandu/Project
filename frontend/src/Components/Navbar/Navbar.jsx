@@ -17,17 +17,25 @@ const Navbar = () => {
 
   // Main navigation items
   const navItems = [
-    { name: "Home", icon: <FiHome size={20} />, path: "/" },
-    { name: "Products", icon: <FiShoppingBag size={20} />, path: "/products" },
-    { name: "Gallery", icon: <FiImage size={20} />, path: "/gallery" },
-    { name: "Dashboard", icon: <FiGrid size={20} />, path: "/dashboard" },
+    { name: "Home", icon: <FiHome size={20} />, path: "/home" },
+    {
+      name: "Products",
+      icon: <FiShoppingBag size={20} />,
+      path: "/home/products",
+    },
+    { name: "Gallery", icon: <FiImage size={20} />, path: "/home/gallery" },
+    { name: "Dashboard", icon: <FiGrid size={20} />, path: "/home/dashboard" },
   ];
 
   // Footer navigation items
   const footerItems = [
-    { name: "Settings", icon: <FiSettings size={20} />, path: "/settings" },
-    { name: "Profile", icon: <FiUser size={20} />, path: "/profile" },
-    { name: "Logout", icon: <FiLogOut size={20} />, path: "/logout" },
+    {
+      name: "Settings",
+      icon: <FiSettings size={20} />,
+      path: "/home/settings",
+    },
+    { name: "Profile", icon: <FiUser size={20} />, path: "/home/profile" },
+    { name: "Logout", icon: <FiLogOut size={20} />, path: "/home/logout" },
   ];
 
   return (

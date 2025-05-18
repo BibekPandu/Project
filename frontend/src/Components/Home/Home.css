@@ -1,125 +1,17 @@
-/* Home page styles with parallax */
-.home-container {
+/* Home.css */
+.home-wrapper {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  width: 100%;
 }
 
-.main-content {
+.home-content {
+  flex-grow: 1;
+  padding: 20px;
   margin-left: var(--nav-collapsed-width);
-  transition: all var(--nav-transition);
-  width: calc(100% - var(--nav-collapsed-width));
+  transition: margin-left var(--nav-transition);
 }
 
-.nav-sidebar.expanded ~ .main-content {
+.nav-sidebar.expanded ~ .home-content {
   margin-left: var(--nav-expanded-width);
-  width: calc(100% - var(--nav-expanded-width));
-}
-
-/* Parallax sections */
-.parallax-section {
-  min-height: 100vh;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.parallax-section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.parallax-content {
-  position: relative;
-  z-index: 1;
-  color: white;
-  text-align: center;
-  padding: 2rem;
-  max-width: 800px;
-}
-
-.hero-section {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.stats-section {
-  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-}
-
-/* Content sections */
-.content-section {
-  padding: 4rem 2rem;
-  background: #f9f9f9;
-}
-
-.content-card {
-  background: white;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Stats grid */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.stat-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  padding: 1.5rem;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Action buttons */
-.action-buttons {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.action-btn {
-  padding: 0.75rem 1.5rem;
-  background: var(--nav-active-color);
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.action-btn:hover {
-  background: #2c4ab3;
-  transform: translateY(-2px);
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .action-buttons {
-    flex-direction: column;
-  }
-
-  .parallax-content,
-  .content-card {
-    padding: 1.5rem;
-  }
 }
