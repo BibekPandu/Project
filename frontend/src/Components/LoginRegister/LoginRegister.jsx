@@ -12,6 +12,7 @@ const LoginRegister = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    role: "",
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -39,7 +40,12 @@ const LoginRegister = () => {
         // Save logged-in user
         localStorage.setItem("user", JSON.stringify(user));
         setError("");
-        navigate("/home"); // or /home
+        // Redirect based on role
+        if (user.role === "admin") {
+          navigate("/home/admin-dashboard");
+        } else {
+          navigate("/home/client-dashboard");
+        }
       } else {
         setError("Invalid email or password.");
       }
@@ -49,7 +55,12 @@ const LoginRegister = () => {
         setError("Passwords do not match!");
         return;
       }
-      if (!formData.username || !formData.email || !formData.password) {
+      if (
+        !formData.username ||
+        !formData.email ||
+        !formData.password ||
+        !formData.role
+      ) {
         setError("Please fill in all fields.");
         return;
       }
@@ -63,6 +74,8 @@ const LoginRegister = () => {
         username: formData.username,
         email: formData.email,
         password: formData.password,
+        role: formData.role,
+        registrationDate: new Date().toLocaleDateString(),
       };
       users.push(newUser);
       localStorage.setItem("users", JSON.stringify(users));
@@ -74,6 +87,7 @@ const LoginRegister = () => {
         email: "",
         password: "",
         confirmPassword: "",
+        role: "",
       });
     }
   };
@@ -157,6 +171,28 @@ const LoginRegister = () => {
                 >
                   {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
                 </span>
+              </div>
+            )}
+
+            {/* Role selection for registration */}
+            {!isLogin && (
+              <div className="input-box">
+                <label htmlFor="role" className="role-label">
+                  Register as:
+                </label>
+                <br />
+                <select
+                  name="role"
+                  id="role"
+                  required
+                  value={formData.role}
+                  onChange={handleInputChange}
+                  className="role-select"
+                >
+                  <option value="">Select Role</option>
+                  <option value="client">Client</option>
+                  <option value="admin">Admin</option>
+                </select>
               </div>
             )}
 
