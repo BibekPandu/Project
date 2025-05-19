@@ -188,6 +188,21 @@
   color: var(--color-primary, rgb(189, 61, 38));
   border: 1px solid var(--color-primary, rgb(189, 61, 38));
 }
+.link-button {
+  background: none;
+  border: none;
+  color: var(--color-primary, rgb(189, 61, 38));
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+  font-weight: 500;
+}
+
+.link-button:hover {
+  color: var(--color-black-Ex, #222222);
+  text-decoration: underline;
+}
 
 /* Responsive adjustments for the login box if necessary */
 @media (max-width: 600px) {

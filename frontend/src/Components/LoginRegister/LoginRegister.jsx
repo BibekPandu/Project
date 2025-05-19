@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaUser, FaLock, FaEye, FaEyeSlash, FaEnvelope } from "react-icons/fa";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 import "./LoginRegister.css";
 
 const LoginRegister = () => {
@@ -13,30 +13,68 @@ const LoginRegister = () => {
     password: "",
     confirmPassword: "",
   });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const navigate = useNavigate(); // Initialize useNavigate
-
+  // Handle input changes
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+    setError(""); // Clear error on input
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (isLogin) {
-      // Handle login logic
-      console.log("Login data:", formData);
-      // Navigate to Home page after successful login
-      navigate("/home"); // Adjust the path as necessary
+      // LOGIN LOGIC
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+      const user = users.find(
+        (u) => u.email === formData.email && u.password === formData.password
+      );
+      if (user) {
+        // Save logged-in user
+        localStorage.setItem("user", JSON.stringify(user));
+        setError("");
+        navigate("/home"); // or /home
+      } else {
+        setError("Invalid email or password.");
+      }
     } else {
-      // Handle registration logic
+      // REGISTRATION LOGIC
       if (formData.password !== formData.confirmPassword) {
-        alert("Passwords do not match!");
+        setError("Passwords do not match!");
         return;
       }
-      console.log("Register data:", formData);
+      if (!formData.username || !formData.email || !formData.password) {
+        setError("Please fill in all fields.");
+        return;
+      }
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+      if (users.find((u) => u.email === formData.email)) {
+        setError("Email already registered.");
+        return;
+      }
+      // Save new user
+      const newUser = {
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+      };
+      users.push(newUser);
+      localStorage.setItem("users", JSON.stringify(users));
+      setError("");
+      alert("Registration successful! Please log in.");
+      setIsLogin(true);
+      setFormData({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
     }
   };
 
@@ -48,7 +86,10 @@ const LoginRegister = () => {
             <h2>{isLogin ? "Login" : "Register"}</h2>
             <button
               className="btn btn-border"
-              onClick={() => setIsLogin(!isLogin)}
+              onClick={() => {
+                setIsLogin(!isLogin);
+                setError("");
+              }}
             >
               {isLogin ? "Create Account" : "Already Registered?"}
             </button>
@@ -125,9 +166,19 @@ const LoginRegister = () => {
                   <input type="checkbox" />
                   Remember Me
                 </label>
-                <a href="#">Forgot Password?</a>
+                <button
+                  type="button"
+                  className="link-button"
+                  onClick={() =>
+                    alert("Forgot password functionality coming soon!")
+                  }
+                >
+                  Forgot Password?
+                </button>
               </div>
             )}
+
+            {error && <div className="error-message">{error}</div>}
 
             <button type="submit" className="btn btn-primary">
               {isLogin ? "Sign In" : "Register"}
