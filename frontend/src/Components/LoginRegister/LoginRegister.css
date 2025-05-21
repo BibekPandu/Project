@@ -93,9 +93,6 @@ form {
 
 .input-box select {
   appearance: none;
-  background: #fff
-    url("data:image/svg+xml;utf8,<svg fill='gray' height='18' viewBox='0 0 24 24' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>")
-    no-repeat right 16px center/18px 18px;
   padding-right: 40px;
 }
 

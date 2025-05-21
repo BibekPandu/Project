@@ -17,7 +17,7 @@ const Navbar = () => {
 
   // Main navigation items
   const navItems = [
-    { name: "Home", icon: <FiHome size={20} />, path: "/home" },
+    { name: "Home", icon: <FiHome size={20} />, path: "/home/dashboard" },
     {
       name: "Products",
       icon: <FiShoppingBag size={20} />,
@@ -25,6 +25,11 @@ const Navbar = () => {
     },
     { name: "Gallery", icon: <FiImage size={20} />, path: "/home/gallery" },
     { name: "Dashboard", icon: <FiGrid size={20} />, path: "/home/dashboard" },
+    {
+      name: "Gallery",
+      icon: <FiImage size={20} />,
+      path: "/home/vehicleregister",
+    },
   ];
 
   // Footer navigation items

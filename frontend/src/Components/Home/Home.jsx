@@ -2,13 +2,14 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
-import Dashboard from "../../Pages/Dashboard";
+import Dashboard from "../../Pages/Dashboard/Dashboard";
 // import Products from "../../Pages/Products";
 // import Gallery from "../Gallery/Gallery";
 import Settings from "../../Pages/Settings";
-import Profile from "../../Pages/Profile";
+import Profile from "../../Pages/Profile/Profile";
 import Logout from "../../Pages/Logout";
 import "./Home.css";
+import VehicleRegister from "../../Pages/VehicleRegister/VehicleRegister";
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
       <div className="home-content">
         <Routes>
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="vehicleregister" element={<VehicleRegister />} />
           {/* <Route path="products" element={<Products />} /> */}
           {/* <Route path="gallery" element={<Gallery />} /> */}
           <Route path="settings" element={<Settings />} />
