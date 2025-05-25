@@ -106,7 +106,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className={`dashboard ${sidebarOpen ? "" : "sidebar-collapsed"}`}>
+    <div>
       <div className="main-content">
         <header className="top-bar">
           <div className="search-bar">
