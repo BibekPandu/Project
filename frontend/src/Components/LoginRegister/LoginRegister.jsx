@@ -52,7 +52,7 @@ const LoginRegister = () => {
     } else {
       // REGISTRATION LOGIC
       if (formData.password !== formData.confirmPassword) {
-        setError("Passwords do not match!");
+        setError("Passwords does not match!");
         return;
       }
       if (
