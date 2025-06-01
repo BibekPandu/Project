@@ -2,16 +2,13 @@
 import {
   FiHome,
   FiShoppingBag,
-  FiUsers,
-  FiMessageSquare,
   FiImage,
-  FiPackage,
+  FiGrid,
   FiSettings,
   FiUser,
   FiLogOut,
-  FiAward,
 } from "react-icons/fi";
-import { AiOutlineDashboard } from "react-icons/ai";
+// import { AiOutlineDashboard } from "react-icons/ai";
 
 export const sidebarNavigation = {
   primary: [
