@@ -9,7 +9,6 @@ import {
   FaCog,
   FaSignOutAlt,
 } from "react-icons/fa";
-
 const DriverDashboard = () => {
   const navigate = useNavigate();
   const [driverData, setDriverData] = useState({

@@ -9,7 +9,6 @@ import {
   FaCog,
   FaSignOutAlt,
 } from "react-icons/fa";
-
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const [stats, setStats] = useState({

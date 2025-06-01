@@ -1,10 +1,12 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import LoginRegister from "./Components/LoginRegister/LoginRegister";
-import Home from "./Components/Home/Home";
+
+import AdminDashboard from "./Components/Dashboard/AdminDashboard/AdminDashboard";
+import ManagerDashboard from "./Components/Dashboard/ManagerDashboard/ManagerDashboard";
+import DriverDashboard from "./Components/Dashboard/DriverDashboard/DriverDashboard";
 
 function App() {
-  // Check if user is authenticated
   const isAuthenticated =
     localStorage.getItem("token") && localStorage.getItem("userRole");
 
@@ -13,29 +15,12 @@ function App() {
       {/* Public routes */}
       <Route path="/login" element={<LoginRegister />} />
 
-      {/* Protected routes */}
-      <Route
-        path="/"
-        element={
-          isAuthenticated ? (
-            <Navigate to="/home" replace />
-          ) : (
-            <Navigate to="/login" replace />
-          )
-        }
-      />
-
-      <Route
-        path="/home/*"
-        element={isAuthenticated ? <Home /> : <Navigate to="/login" replace />}
-      />
-
-      {/* Role-specific dashboard routes */}
+      {/* Role-specific dashboards */}
       <Route
         path="/admin-dashboard/*"
         element={
           isAuthenticated && localStorage.getItem("userRole") === "admin" ? (
-            <Home />
+            <AdminDashboard />
           ) : (
             <Navigate to="/login" replace />
           )
@@ -45,7 +30,7 @@ function App() {
         path="/manager-dashboard/*"
         element={
           isAuthenticated && localStorage.getItem("userRole") === "manager" ? (
-            <Home />
+            <ManagerDashboard />
           ) : (
             <Navigate to="/login" replace />
           )
@@ -55,19 +40,22 @@ function App() {
         path="/driver-dashboard/*"
         element={
           isAuthenticated && localStorage.getItem("userRole") === "driver" ? (
-            <Home />
+            <DriverDashboard />
           ) : (
             <Navigate to="/login" replace />
           )
         }
       />
 
-      {/* Catch all route */}
+      {/* Catch-all route */}
       <Route
         path="*"
         element={
           isAuthenticated ? (
-            <Navigate to="/home" replace />
+            <Navigate
+              to={`/${localStorage.getItem("userRole")}-dashboard`}
+              replace
+            />
           ) : (
             <Navigate to="/login" replace />
           )
