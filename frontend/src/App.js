@@ -1,7 +1,6 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import LoginRegister from "./Components/LoginRegister/LoginRegister";
-
 import AdminDashboard from "./Components/Dashboard/AdminDashboard/AdminDashboard";
 import ManagerDashboard from "./Components/Dashboard/ManagerDashboard/ManagerDashboard";
 import DriverDashboard from "./Components/Dashboard/DriverDashboard/DriverDashboard";

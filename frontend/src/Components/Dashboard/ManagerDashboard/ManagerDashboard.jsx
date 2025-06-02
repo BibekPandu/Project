@@ -9,8 +9,11 @@ import {
   FaCog,
   FaSignOutAlt,
 } from "react-icons/fa";
+import Settings from "../../../Components/Settings/Settings";
+
 const ManagerDashboard = () => {
   const navigate = useNavigate();
+  const [showSettings, setShowSettings] = useState(false);
   const [stats, setStats] = useState({
     totalVehicles: 0,
     activeDrivers: 0,
@@ -76,7 +79,7 @@ const ManagerDashboard = () => {
           <button onClick={() => navigate("/manager/trips")}>
             <FaClipboardList /> Trip Management
           </button>
-          <button onClick={() => navigate("/manager/settings")}>
+          <button onClick={() => setShowSettings(true)}>
             <FaCog /> Settings
           </button>
           <button onClick={handleLogout} className="logout-btn">
@@ -128,6 +131,8 @@ const ManagerDashboard = () => {
           </div>
         </div>
       </main>
+
+      {showSettings && <Settings onClose={() => setShowSettings(false)} />}
     </div>
   );
 };
