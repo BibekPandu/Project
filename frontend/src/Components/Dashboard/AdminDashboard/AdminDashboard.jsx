@@ -13,6 +13,10 @@ import Settings from "../../../Components/Settings/Settings";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log("running");
+  }, []);
   const [showSettings, setShowSettings] = useState(false);
   const [stats, setStats] = useState({
     totalUsers: 0,
@@ -41,9 +45,17 @@ const AdminDashboard = () => {
 
   const fetchDashboardData = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:5000/api/admin/dashboard"
-      );
+      // const response = await axios.get(
+      //   "http://localhost:5000/api/admin/dashboard"
+      // );
+      const response = {
+        data: {
+          totalUsers: 10,
+          totalVehicles: 20,
+          activeDrivers: 30,
+          pendingRequests: 40,
+        },
+      };
       setStats(response.data);
     } catch (error) {
       console.error("Error fetching dashboard data:", error);

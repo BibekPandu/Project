@@ -129,63 +129,65 @@ const LoginRegister = () => {
 
     try {
       if (isLogin) {
-        // Simulate login
-        const users = JSON.parse(localStorage.getItem("users") || "[]");
-        const user = users.find(
-          (u) =>
-            (u.email === formData.email || u.phone === formData.phone) &&
-            u.password === formData.password &&
-            u.role === formData.role
-        );
+        // Login API call
+        const response = await fetch("http://localhost:5000/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: formData.email,
+            phone: formData.phone,
+            password: formData.password,
+            role: formData.role,
+          }),
+        });
 
-        if (user) {
-          // Store user info
-          localStorage.setItem("token", "dummy-token");
-          localStorage.setItem("userRole", user.role);
-          localStorage.setItem("userId", user.id);
+        const data = await response.json();
 
-          // Redirect based on role
-          switch (user.role) {
-            case "admin":
-              navigate("/admin-dashboard");
-              break;
-            case "manager":
-              navigate("/manager-dashboard");
-              break;
-            case "driver":
-              navigate("/driver-dashboard");
-              break;
-            default:
-              navigate("/dashboard");
-          }
-        } else {
-          setError("Invalid credentials or role");
+        if (!response.ok) {
+          throw new Error(data.message || "Login failed");
+        }
+
+        // Store user info
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userRole", data.user.role);
+        localStorage.setItem("userId", data.user.id);
+
+        // Redirect based on role
+        switch (data.user.role) {
+          case "admin":
+            navigate("/admin-dashboard");
+            break;
+          case "manager":
+            navigate("/manager-dashboard");
+            break;
+          case "driver":
+            navigate("/driver-dashboard");
+            break;
+          default:
+            navigate("/dashboard");
         }
       } else {
-        // Simulate registration
-        const users = JSON.parse(localStorage.getItem("users") || "[]");
+        // Registration API call
+        const response = await fetch("http://localhost:5000/api/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: formData.email,
+            phone: formData.phone,
+            password: formData.password,
+            role: formData.role,
+          }),
+        });
 
-        // Check if user already exists
-        const existingUser = users.find(
-          (u) => u.email === formData.email || u.phone === formData.phone
-        );
+        const data = await response.json();
 
-        if (existingUser) {
-          setError("User with this email or phone already exists");
-          return;
+        if (!response.ok) {
+          throw new Error(data.message || "Registration failed");
         }
-
-        // Create new user
-        const newUser = {
-          id: Date.now().toString(),
-          email: formData.email,
-          phone: formData.phone,
-          password: formData.password,
-          role: formData.role,
-        };
-
-        users.push(newUser);
-        localStorage.setItem("users", JSON.stringify(users));
 
         setIsLogin(true);
         setError("");
@@ -199,7 +201,7 @@ const LoginRegister = () => {
         alert("Registration successful! Please login.");
       }
     } catch (err) {
-      setError("An error occurred. Please try again.");
+      setError(err.message || "An error occurred. Please try again.");
     } finally {
       setLoading(false);
     }

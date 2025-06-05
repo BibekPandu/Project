@@ -41,10 +41,10 @@ const ManagerDashboard = () => {
 
   const fetchDashboardData = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:5000/api/manager/dashboard"
-      );
-      setStats(response.data);
+      // // const response = await axios.get(
+      // //   "http://localhost:5000/api/manager/dashboard"
+      // // );
+      // setStats(response.data);
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
     } finally {
