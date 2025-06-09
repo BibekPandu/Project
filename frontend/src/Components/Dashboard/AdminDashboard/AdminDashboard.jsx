@@ -13,10 +13,6 @@ import Settings from "../../../Components/Settings/Settings";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log("running");
-  }, []);
   const [showSettings, setShowSettings] = useState(false);
   const [stats, setStats] = useState({
     totalUsers: 0,
@@ -25,6 +21,7 @@ const AdminDashboard = () => {
     pendingRequests: 0,
   });
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     // Check if user is authenticated and is admin
@@ -45,20 +42,14 @@ const AdminDashboard = () => {
 
   const fetchDashboardData = async () => {
     try {
-      // const response = await axios.get(
-      //   "http://localhost:5000/api/admin/dashboard"
-      // );
-      const response = {
-        data: {
-          totalUsers: 10,
-          totalVehicles: 20,
-          activeDrivers: 30,
-          pendingRequests: 40,
-        },
-      };
+      const response = await axios.get(
+        "http://localhost:5000/api/admin/dashboard"
+      );
       setStats(response.data);
+      setError(null);
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
+      setError("Failed to fetch dashboard data. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -73,6 +64,10 @@ const AdminDashboard = () => {
 
   if (loading) {
     return <div className="loading">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="error">{error}</div>;
   }
 
   return (
